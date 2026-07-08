@@ -1,0 +1,23 @@
+.carrousel{
+    display: flex;
+    gap: 40px;
+
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 50px;
+}
+
+.product-card{
+    display: flex;
+    flex-direction: column;
+
+    width: 320px;
+    height: 450px;
+
+    flex: 0 0 320px;   /* ← important */
+    /* ou flex-shrink: 0; */
+
+    padding: 10px;
+    border: 1px solid #ccc;
+
+}

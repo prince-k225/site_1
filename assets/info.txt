@@ -1,0 +1,11 @@
+// inserer une valeur dans la base de donnée
+$dbRequ = $db->prepare('INSERT INTO products (name, description, price, category, stock, in_sold) VALUES(:name, :description, :price, :category, :stock, :in_sold)');
+$dbRequ->execute([
+    ':name'=> 'shirt',
+    ':description' => 'shirt super jolie',
+    ':price' => 100,
+    'category' => 'shirt',
+    'stock' => 35,
+    'in_sold' => 1,
+]);
+exit;
