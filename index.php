@@ -3,6 +3,7 @@
 // Inclusion des fichiers principaux
 include_once '_config/config.php';
 include_once '_functions/functions.php';
+include_once PATH_REQUIRE.'_classes/Db_class.php';
 
 // Définition de la page courante
 if (isset($_GET['page']) AND !empty($_GET['page'])) {

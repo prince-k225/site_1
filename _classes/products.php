@@ -19,9 +19,9 @@ class Products
         $this->name = $data['name'];
         $this->description = $data['description'];
         $this->price = $data['price'];
-        $this->category = data['category'];
-        $this->stock = data['stock'];
-        $this->in_stock = data['in_stock'];
+        $this->category = $data['category'];
+        $this->stock = $data['stock'];
+        $this->in_stock = $data['in_stock'];
     }
 
     static function getAllProducts() {

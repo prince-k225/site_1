@@ -3,6 +3,8 @@
 <head>
 
     <?php include_once 'views/includes/head.php'?>
+    <link rel="stylesheet" href="<?= PATH.'assets/styles/css/home.css' ?>" />
+
 
     <title><?= ucfirst($page) ?></title>
 </head>
@@ -75,7 +77,7 @@
 
     <?php include_once 'views/includes/footer.php'?>
 
-    <script src="<?= PATH."assets/styles/css/home.css" defer></script>
+    <script src="<?= PATH.'assets/styles/css/home.css' ?>" defer></script>
 
 </body>
 </html>
