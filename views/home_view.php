@@ -18,29 +18,36 @@
         <section class="gallery-section">
             <h1 class="page-title">Nouvelle Ère</h1>
             
-            <div class="cloth-card" onclick="showDetails('Cyber Jacket', '149 €', ['S', 'M', 'L'], ['#00F0FF', '#FF5A5F'], 'Une veste futuriste imperméable avec doublure thermique active et finitions réfléchissantes.', 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&q=80')">
-                <div class="cloth-img" style="background-image: url('https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&q=80')"></div>
-                <div class="cloth-info">
-                    <h3>Cyber Jacket</h3>
-                    <p>149 €</p>
-                </div>
-            </div>
-
-            <div class="cloth-card" onclick="showDetails('Hoodie Onyx', '89 €', ['M', 'XL'], ['#1E293B', '#000000'], 'Hoodie oversize en coton lourd biologique. Confort absolu, coupe destructurée.', 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&q=80')">
-                <div class="cloth-img" style="background-image: url('https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&q=80')"></div>
-                <div class="cloth-info">
-                    <h3>Hoodie Onyx</h3>
-                    <p>89 €</p>
-                </div>
-            </div>
-
-            <div class="cloth-card" onclick="showDetails('Cargo Neon', '110 €', ['38', '40', '42'], ['#10B981', '#1E293B'], 'Pantalon cargo technique doté de poches modulaires et de sangles d\'ajustement.', 'https://images.unsplash.com/photo-1517423568366-8b83523034fd?w=500&q=80')">
-                <div class="cloth-img" style="background-image: url('https://images.unsplash.com/photo-1517423568366-8b83523034fd?w=500&q=80')"></div>
-                <div class="cloth-info">
-                    <h3>Cargo Neon</h3>
-                    <p>110 €</p>
-                </div>
-            </div>
+            <?php if (empty($listProducts)): ?>
+                <p>Aucun vêtement disponible pour le moment.</p>
+            <?php else: ?>
+                <?php foreach ($listProducts as $product): 
+                    // Sécurisation des chaînes de caractères pour éviter les bugs JavaScript
+                    $escapedName = htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8');
+                    $escapedDesc = htmlspecialchars($product['description'], ENT_QUOTES, 'UTF-8');
+                    $imgUrl = htmlspecialchars($product['image_url'], ENT_QUOTES, 'UTF-8');
+                    
+                    // Transformation des chaînes "S,M,L" de la BDD en tableaux utilisables par JS
+                    $sizesJS = json_encode(explode(',', $product['sizes']));
+                    $colorsJS = json_encode(explode(',', $product['colors']));
+                ?>
+                    <div class="cloth-card" onclick="showDetails(
+                        '<?= $escapedName ?>', 
+                        '<?= $product['price'] ?> €', 
+                        <?= $sizesJS ?>, 
+                        <?= $colorsJS ?>, 
+                        '<?= $escapedDesc ?>', 
+                        '<?= $imgUrl ?>'
+                    )">
+                        <div class="cloth-img" style="background-image: url('<?= $imgUrl ?>')"></div>
+                        <div class="cloth-info">
+                            <h3><?= $escapedName ?></h3>
+                            <p><?= $product['price'] ?> €</p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            
         </section>
 
         <section class="details-section" id="detailsSection">
@@ -75,9 +82,6 @@
 
     </div>
 
-    <?php include_once 'views/includes/footer.php'?>
-
-    <script src="<?= PATH.'assets/styles/css/home.css' ?>" defer></script>
-
+    <script src="script.js" defer></script>
 </body>
 </html>
